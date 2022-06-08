@@ -1,23 +1,21 @@
 package nl.inholland.tentamen.model.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
 @Entity
+@Table(name = "Customer")
 public class Customer {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long customerId;
     private String name;
 
@@ -26,6 +24,5 @@ public class Customer {
             name = "customers_brands",
             joinColumns = @JoinColumn(name = "customer_Id"),
             inverseJoinColumns = @JoinColumn(name = "brand_Id"))
-    private Set<Brand> brands = new HashSet<>();
-
+    private List<Brand> brands = new ArrayList<>();
 }

@@ -12,6 +12,6 @@ public interface BrandRepository extends JpaRepository<Brand, Long> {
 
     @Transactional
     @Modifying
-    @Query(value = "UPDATE Brand b SET b.brandId = 5 WHERE b.brandId = 2")
+    @Query(value = "UPDATE Brand b SET b.brandId = 5 WHERE b.brandId = 1")
     public void updateId();
 }

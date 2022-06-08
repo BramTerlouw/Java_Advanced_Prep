@@ -12,10 +12,11 @@ import javax.persistence.*;
 @Getter
 @Setter
 @Entity
+@Table(name = "Product")
 public class Product {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long userId;
     private String name;
     private String description;

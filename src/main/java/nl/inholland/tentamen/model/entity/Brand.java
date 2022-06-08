@@ -6,25 +6,35 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
 @Entity
+@Table(name = "Brand")
 public class Brand {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long brandId;
     private String name;
 
-    @OneToMany(cascade = CascadeType.MERGE)
-    @JoinColumn(name = "brand_Id")
-    private Set<Product> products = new HashSet<>();
+    @OneToMany(mappedBy = "brand")
+    private List<Product> products = new ArrayList<>();
 
-    @ManyToMany(mappedBy = "brands")
-    private Set<Customer> customers = new HashSet<>();
+    @ManyToMany(mappedBy = "brands", cascade = CascadeType.PERSIST)
+    private List<Customer> customers = new ArrayList<>();
+
+    public void addProductToBrand(Product product) {
+        product.setBrand(this);
+        this.products.add(product);
+    }
+
+    public void addCustomerToBrand(Customer customer) {
+        customer.setBrands(List.of(this));
+        this.customers.add(customer);
+    }
 }

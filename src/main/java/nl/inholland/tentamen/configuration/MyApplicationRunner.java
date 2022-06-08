@@ -11,6 +11,8 @@ import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Set;
 
 @Component
@@ -35,16 +37,15 @@ public class MyApplicationRunner implements ApplicationRunner {
 
         Brand brandOne = new Brand();
         brandOne.setName("Jurassic park");
-        brandOne.setProducts(Set.of(productOne));
 
         Customer customerOne = new Customer();
         customerOne.setName("Mark Haan");
 
-        brandOne.setCustomers(Set.of(customerOne));
-        customerOne.setBrands(Set.of(brandOne));
+        brandOne.addCustomerToBrand(customerOne);
+        brandOne.addProductToBrand(productOne);
 
-        productService.addOneFromSeeder(productOne);
         brandService.addBrandFromSeeder(brandOne);
+        productService.addOneFromSeeder(productOne);
         customerService.addCustomerFromSeeder(customerOne);
 
         // brandService.updateBrandId();
