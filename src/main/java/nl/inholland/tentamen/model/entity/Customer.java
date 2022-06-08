@@ -3,6 +3,7 @@ package nl.inholland.tentamen.model.entity;
 import lombok.*;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,6 +18,8 @@ public class Customer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long customerId;
+
+    @NotNull(message = "Name must not be empty")
     private String name;
 
     @ManyToMany

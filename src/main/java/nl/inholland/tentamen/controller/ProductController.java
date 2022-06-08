@@ -8,6 +8,7 @@ import nl.inholland.tentamen.service.ProductService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -40,19 +41,15 @@ public class ProductController {
         return this.mapper.map(productService.getOne(Long.valueOf(id)), ProductResponseDTO.class);
     }
 
+    @PostMapping
+    public ProductResponseDTO addOne(@Validated @RequestBody ProductDTO product) {
+        return mapper.map(productService.addOne(mapper.map(product, Product.class)), ProductResponseDTO.class);
+    }
+
     @PutMapping
     public ProductResponseDTO updateOne(@RequestBody ProductDTO product) {
         try {
             return mapper.map(productService.updateOne(mapper.map(product, Product.class)), ProductResponseDTO.class);
-        } catch (Exception ex) {
-            throw new ResponseStatusException(HttpStatus.NOT_ACCEPTABLE, ex.getMessage());
-        }
-    }
-
-    @PostMapping
-    public ProductResponseDTO addOne(@RequestBody ProductDTO product) {
-        try {
-            return mapper.map(productService.addOne(mapper.map(product, Product.class)), ProductResponseDTO.class);
         } catch (Exception ex) {
             throw new ResponseStatusException(HttpStatus.NOT_ACCEPTABLE, ex.getMessage());
         }

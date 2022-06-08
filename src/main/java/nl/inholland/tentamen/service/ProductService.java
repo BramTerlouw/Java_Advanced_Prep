@@ -19,7 +19,7 @@ public class ProductService {
     }
 
     public Product getOne(Long id) throws ProductNotFoundException {
-        return productRepository.findById(id).orElseThrow(ProductNotFoundException::new);
+        return productRepository.findById(id).orElseThrow(() -> new ProductNotFoundException("Product could not be found!"));
     }
 
     public Product updateOne(Product product) {
