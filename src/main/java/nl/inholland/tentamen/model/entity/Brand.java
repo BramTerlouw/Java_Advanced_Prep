@@ -25,7 +25,7 @@ public class Brand {
     @NotNull(message = "Name must not be empty")
     private String name;
 
-    @OneToMany(mappedBy = "brand")
+    @OneToMany(mappedBy = "brand", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Product> products = new ArrayList<>();
 
     @ManyToMany(mappedBy = "brands", cascade = CascadeType.PERSIST)

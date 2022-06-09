@@ -14,8 +14,4 @@ public class BrandService {
     public void addBrandFromSeeder(Brand brand) {
         brandRepository.save(brand);
     }
-
-    public void updateBrandId() {
-        brandRepository.updateId();
-    }
 }

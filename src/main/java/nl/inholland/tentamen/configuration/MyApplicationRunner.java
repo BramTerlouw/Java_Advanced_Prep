@@ -47,7 +47,5 @@ public class MyApplicationRunner implements ApplicationRunner {
         brandService.addBrandFromSeeder(brandOne);
         productService.addOneFromSeeder(productOne);
         customerService.addCustomerFromSeeder(customerOne);
-
-        // brandService.updateBrandId();
     }
 }
